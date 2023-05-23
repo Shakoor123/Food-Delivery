@@ -1,0 +1,8 @@
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.homeWrapper {
+  width: 1110px;
+}
