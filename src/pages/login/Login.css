@@ -15,8 +15,7 @@
   flex: 5.5;
   background-color: #697bff;
   color: white;
-  padding-top: 35px;
-  padding-left: 55px;
+  padding-top: 15px;
 }
 .loginTitle {
   font-weight: 700;
@@ -56,6 +55,7 @@ label {
   outline: none;
   padding: 12px;
   width: 100%;
+  border-radius: 8px;
 }
 .loginEye {
   padding-right: 12px;
@@ -70,6 +70,7 @@ label {
   align-items: center;
   justify-content: space-between;
 }
+
 .loginCheckbox {
   border: 2px solid #c7c8d2;
   border-radius: 4px;
@@ -102,6 +103,7 @@ label {
   font-size: 14px;
   color: #ffffff;
   margin-top: 12px;
+  cursor: pointer;
 }
 .forgotWrapper {
   max-width: 350px;
@@ -113,6 +115,7 @@ label {
   font-weight: 700;
   font-size: 14px;
   color: #4e60ff;
+  cursor: pointer;
 }
 .loginBottom {
   max-width: 350px;
@@ -128,9 +131,10 @@ label {
 .switchLink {
   color: #4e60ff;
   font-weight: 700;
+  cursor: pointer;
 }
 .loginbg {
-  max-height: 530px;
+  max-height: 550px;
 }
 .loginSlide {
   display: flex;
@@ -163,6 +167,9 @@ label {
 }
 .dotActive {
   opacity: 1;
+}
+.loginEye {
+  cursor: pointer;
 }
 /* mobile optimization */
 @media only screen and (max-width: 480px) {

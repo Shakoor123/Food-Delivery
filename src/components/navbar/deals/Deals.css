@@ -3,4 +3,78 @@
   display: flex;
   align-items: center;
   gap: 30px;
+  width: 100%;
+}
+.dealItem {
+  display: flex;
+  width: 540px;
+  background: #f3f4ff;
+  border-radius: 16px;
+}
+.dealItem2 {
+  display: flex;
+  width: 540px;
+  background: #fff3ed;
+  border-radius: 16px;
+}
+.dealLeft {
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.dealRight {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 16px;
+  justify-content: space-between;
+}
+.dealTitle {
+  font-weight: 600;
+  font-size: 20px;
+  color: #2b2b43;
+}
+.dealPersentage {
+  font-weight: 800;
+  font-size: 40px;
+  color: #4e60ff;
+}
+.dealPersentage2 {
+  font-weight: 800;
+  font-size: 40px;
+  color: #fd6d22;
+}
+.dealCategory {
+  font-weight: 400;
+  font-size: 14px;
+  color: #83859c;
+}
+.dealTop {
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (max-width: 480px) {
+  .deals {
+    flex-direction: column;
+    height: auto;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 50px;
+  }
+  .dealItem,
+  .dealItem2 {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+  }
+  .dealLeft {
+    width: 100%;
+  }
+  .dealRight {
+    width: 90%;
+    flex-direction: row;
+    padding: 16px;
+  }
 }

@@ -3,13 +3,19 @@ import "./Home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Deals from "../../components/navbar/deals/Deals";
 import Categories from "../../components/categories/Categories";
+import Restaurants from "../../components/restaurants/Restaurants";
 export default function Home() {
   return (
     <div className="home">
+      <div className="homeNavWrapper">
+        <div className="homeWrapper">
+          <Navbar />
+        </div>
+      </div>
       <div className="homeWrapper">
-        <Navbar />
         <Deals />
         <Categories />
+        <Restaurants />
       </div>
     </div>
   );

@@ -3,11 +3,13 @@ import "./Login.css";
 import logo from "../../assets/logo.png";
 import loginBg from "../../assets/loginBg.png";
 import eye from "../../assets/eye.png";
-
+import { useNavigate } from "react-router-dom";
+import Slide from "../../components/slide/Slide";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -18,9 +20,7 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform login logic here
-    console.log("Username:", username);
-    console.log("Password:", password);
+    navigate("/home");
   };
   return (
     <div className="login">
@@ -52,12 +52,19 @@ export default function Login() {
               <div className="loginInputWrapper">
                 <input
                   className="logininput"
-                  type="password"
+                  type={showPass ? "text" : "password"}
                   id="password"
                   value={password}
                   onChange={handlePasswordChange}
                 />
-                <img src={eye} alt="" className="loginEye" />
+                <img
+                  src={eye}
+                  alt=""
+                  className="loginEye"
+                  onClick={() => {
+                    setShowPass(!showPass);
+                  }}
+                />
               </div>
             </div>
             <div className="keepLogin">
@@ -84,7 +91,7 @@ export default function Login() {
         <div className="loginRightWrapper">
           <img src={loginBg} alt="" className="loginbg" />
         </div>
-        <div className="loginSlide">
+        {/* <div className="loginSlide">
           <h2 className="loginSlideTitle">Leave reviews for all meals</h2>
           <div className="loginSlideText">
             Lorem ipsum dolor sit amet, magna scaevola his ei. Cum te paulo
@@ -96,7 +103,8 @@ export default function Login() {
             <div className="loginSlideDot"></div>
             <div className="loginSlideDot"></div>
           </div>
-        </div>
+        </div> */}
+        <Slide />
       </div>
     </div>
   );

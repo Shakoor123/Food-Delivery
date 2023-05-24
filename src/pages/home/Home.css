@@ -2,7 +2,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .homeWrapper {
   width: 1110px;
+}
+.homeNavWrapper {
+  width: 100%;
+  border-bottom: 1px solid rgb(234, 228, 228);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media only screen and (max-width: 480px) {
+  .homeWrapper {
+    width: 100%;
+  }
 }

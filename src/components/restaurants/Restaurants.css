@@ -1,0 +1,134 @@
+.restoTitle {
+  font-weight: 600;
+  font-size: 20px;
+  color: #2b2b43;
+}
+.foodImg {
+  width: 12px;
+  height: 12px;
+}
+.restoImage {
+  max-width: 350px;
+  max-height: 160px;
+  border-radius: 16px 16px 0 0;
+}
+.restoItem {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  background: #ffffff;
+  border: 1px solid #edeef2;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  position: relative;
+}
+.restoMiddle {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.restoTitleAndPrice {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.restoItemTitle {
+  font-weight: 700;
+  font-size: 18px;
+  color: #2b2b43;
+  cursor: pointer;
+}
+.timeAndPrice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #83859c;
+}
+.restoDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.foodlists {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fooditem {
+  width: 70px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #edeef2;
+  border-radius: 100px;
+}
+.foodName {
+  font-weight: 600;
+  font-size: 12px;
+  color: #545563;
+}
+.cartWrapper {
+  position: relative;
+  cursor: pointer;
+}
+.cartValue {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  font-weight: 700;
+  font-size: 10px;
+  color: #ffffff;
+  background: #4e60ff;
+  border: 1.5px solid #ffffff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.restaurents {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.featuredDiv {
+  width: 94px;
+  height: 32px;
+  background: #4e60ff;
+  border-radius: 0px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+}
+.featuredText {
+  font-weight: 700;
+  font-size: 11px;
+  color: white;
+}
+@media only screen and (max-width: 480px) {
+  .restoTitle {
+    margin-left: 15px;
+  }
+  .restaurents {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+  }
+  .restoItem {
+    width: 100%;
+  }
+}
