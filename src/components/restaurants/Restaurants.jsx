@@ -12,7 +12,7 @@ import clock from "../../assets/clock.png";
 import cart from "../../assets/cart.png";
 import burger from "../../assets/burger.png";
 import pizza from "../../assets/pizza.png";
-
+import { Link } from "react-router-dom";
 export default function Restaurants() {
   const restaurants = [
     {
@@ -123,7 +123,9 @@ export default function Restaurants() {
             <div className="restoMiddle">
               <div className="restoDetails">
                 <div className="restoTitleAndPrice">
-                  <span className="restoItemTitle">{res.name}</span>
+                  <Link to={"/products"} style={{ textDecoration: "none" }}>
+                    <span className="restoItemTitle">{res.name}</span>
+                  </Link>
                   <span className="timeAndPrice">
                     <img src={clock} alt="" className="clock" /> {res.time} min
                     ▪ ${res.price}
