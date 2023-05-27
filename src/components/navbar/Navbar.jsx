@@ -5,7 +5,10 @@ import search from "../../assets/search.png";
 import profile from "../../assets/profile.png";
 import cart from "../../assets/cart.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 export default function Navbar() {
+  const quantity = useSelector((state) => state.cart.quantity);
   return (
     <div className="navbar">
       <div className="navLeft">
@@ -26,7 +29,7 @@ export default function Navbar() {
         <Link to={"/cart"} style={{ textDecoration: "none" }}>
           <div className="cart">
             <img src={cart} alt="" className="cartIcon" />
-            <span className="cartCount">4</span>
+            <span className="cartCount">{quantity}</span>
           </div>
         </Link>
         <img src={profile} alt="" className="profile" />

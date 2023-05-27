@@ -21,6 +21,7 @@
   border-radius: 16px;
   margin-bottom: 30px;
   position: relative;
+  cursor: pointer;
 }
 .restoMiddle {
   padding: 16px;

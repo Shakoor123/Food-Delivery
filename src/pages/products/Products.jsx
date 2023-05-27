@@ -4,12 +4,16 @@ import Navbar from "../../components/navbar/Navbar";
 import res1 from "../../assets/res1.png";
 import cart from "../../assets/cart.png";
 import sushi from "../../assets/sushi.png";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../../redux/cartRedux";
+import { addRestorent } from "../../redux/restorentRedux";
 export default function Products() {
   const [restorents, setRestorents] = useState([]);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   var { id } = useParams();
   useEffect(() => {
     const getRestorents = async () => {
@@ -38,7 +42,9 @@ export default function Products() {
     };
     getRestorentProduct();
   }, [id]);
-
+  const changeCurrentRestorent = (id) => {
+    dispatch(addRestorent(id));
+  };
   return (
     <div className="home">
       <div className="homeNavWrapper">
@@ -54,9 +60,7 @@ export default function Products() {
               {restorents.map((res) => (
                 <div
                   className={res._id == id ? "resItem resActive" : "resItem"}
-                  onClick={() => {
-                    id = res._id;
-                  }}
+                  onClick={changeCurrentRestorent(res._id)}
                   key={res._id}
                 >
                   <img src={res1} alt="" className="resImage" />
@@ -82,7 +86,14 @@ export default function Products() {
                 <span className="deliveryTime">
                   Delivery in {product.time} min
                 </span>
-                <button className="addtoCart">Add TO Cart</button>
+                <button
+                  className="addtoCart"
+                  onClick={() => {
+                    dispatch(addProduct({ ...product, count: 1 }));
+                  }}
+                >
+                  Add TO Cart
+                </button>
               </div>
             ))}
           </div>

@@ -6,6 +6,9 @@ import eye from "../../assets/eye.png";
 import { useNavigate } from "react-router-dom";
 import Slide from "../../components/slide/Slide";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/userRedux";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +16,7 @@ export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -46,7 +50,7 @@ export default function Login() {
           { email, password }
         );
         console.log("Login successfully");
-        console.log(res.data);
+        dispatch(loginUser(res.data));
         navigate("/home");
       } catch (err) {
         console.log("login faild");
