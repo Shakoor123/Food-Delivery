@@ -7,8 +7,9 @@ import meat from "../../assets/meat.png";
 import sushi from "../../assets/sushi.png";
 import broccoli from "../../assets/broccoli.png";
 import { useRef, useState } from "react";
+import { useEffect } from "react";
 
-export default function Categories() {
+export default function Categories({ setCats }) {
   const [ids, setIds] = useState([]);
   const categories = [
     {
@@ -42,7 +43,10 @@ export default function Categories() {
       image: cake,
     },
   ];
-  console.log(ids);
+  useEffect(() => {
+    setCats(ids);
+  }, [ids]);
+
   return (
     <div className="categories">
       {categories.map((cat) => (

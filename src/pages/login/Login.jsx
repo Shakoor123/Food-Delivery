@@ -5,11 +5,12 @@ import loginBg from "../../assets/loginBg.png";
 import eye from "../../assets/eye.png";
 import { useNavigate } from "react-router-dom";
 import Slide from "../../components/slide/Slide";
+import axios from "axios";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const handleEmailChange = (event) => {
@@ -23,9 +24,35 @@ export default function Login() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    navigate("/home");
+    if (isSignUp) {
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL}/auth/register`,
+          { name, email, password }
+        );
+        console.log("Register successfully");
+        console.log(res.data);
+        setIsSignUp(false);
+      } catch (err) {
+        console.log("registration faild");
+        console.log(err);
+      }
+    } else {
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL}/auth/login`,
+          { email, password }
+        );
+        console.log("Login successfully");
+        console.log(res.data);
+        navigate("/home");
+      } catch (err) {
+        console.log("login faild");
+        console.log(err);
+      }
+    }
   };
   return (
     <div className="login">
@@ -43,18 +70,21 @@ export default function Login() {
           )}
 
           <form onSubmit={handleSubmit} className="loginForm">
-            <div className="formItem">
-              <label htmlFor="name">Name</label>
-              <div className="loginInputWrapper">
-                <input
-                  className="logininput"
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={handleNameChange}
-                />
+            {isSignUp && (
+              <div className="formItem">
+                <label htmlFor="name">Name</label>
+                <div className="loginInputWrapper">
+                  <input
+                    className="logininput"
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={handleNameChange}
+                  />
+                </div>
               </div>
-            </div>
+            )}
+
             <div className="formItem">
               <label htmlFor="email">Email</label>
               <div className="loginInputWrapper">
