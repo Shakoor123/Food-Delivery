@@ -138,6 +138,9 @@ label {
 .loginEye {
   cursor: pointer;
 }
+.restricted {
+  pointer-events: none;
+}
 /* mobile optimization */
 @media only screen and (max-width: 480px) {
   .loginRight {

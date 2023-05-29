@@ -28,7 +28,10 @@ export default function Orders() {
         </div>
       </div>
       <div className="homeWrapper">
-        <h2 className="cartMainTitle">Orders</h2>
+        <h2 className="cartMainTitle">
+          {" "}
+          {orders.length > 0 ? "Orders" : "Your Orders Is Empt"}
+        </h2>
         {orders.length > 0 && (
           <table className="table">
             <thead>

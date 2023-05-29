@@ -15,6 +15,7 @@ export default function Login() {
   const [showPass, setShowPass] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleEmailChange = (event) => {
@@ -39,13 +40,20 @@ export default function Login() {
         alerta("please input username");
         return;
       }
+
       try {
-        const res = await axios.post(
-          `${import.meta.env.VITE_API_URL}/auth/register`,
-          { name, email, password }
+        await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
+          username: name,
+          email,
+          password,
+        });
+        const res1 = await axios.post(
+          `${import.meta.env.VITE_API_URL}/auth/login`,
+          { email, password }
         );
-        console.log(res.data);
-        setIsSignUp(false);
+        dispatch(loginUser(res1.data));
+        localStorage.setItem("foodDelivery", JSON.stringify(res1.data));
+        navigate("/");
       } catch (err) {
         console.log(err);
       }
@@ -139,7 +147,10 @@ export default function Login() {
             )}
 
             <div>
-              <button type="submit" className="loginButton">
+              <button
+                type="submit"
+                className={isLoading ? "loginButton restricted" : "loginButton"}
+              >
                 {isSignUp ? "Sign Up" : "Login"}
               </button>
             </div>

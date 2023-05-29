@@ -47,7 +47,9 @@ export default function Cart() {
       </div>
       <div className="homeWrapper">
         {/* <h2 className="noCartMessage">Your Cart Is Empty</h2> */}
-        <h2 className="cartMainTitle">Cart</h2>
+        <h2 className="cartMainTitle">
+          {cart.quantity > 0 ? "Cart" : "Your Cart Is Empt"}
+        </h2>
         <div className="Cart">
           <div className="cartLeft">
             {cart.products.map((product) => (
@@ -84,26 +86,28 @@ export default function Cart() {
               </div>
             ))}
           </div>
-          <div className="cartRight">
-            <div className="checkout">
-              <h5 className="CheckoutTitle">Check Out Now</h5>
-              <div className="checkoutItem">
-                <span className="checkoutText">Actual Price</span>
-                <span className="checkoutValue">{cart.total * 2}</span>
+          {cart.quantity > 0 && (
+            <div className="cartRight">
+              <div className="checkout">
+                <h5 className="CheckoutTitle">Check Out Now</h5>
+                <div className="checkoutItem">
+                  <span className="checkoutText">Actual Price</span>
+                  <span className="checkoutValue">{cart.total * 2}</span>
+                </div>
+                <div className="checkoutItem">
+                  <span className="checkoutText">Discount</span>
+                  <span className="checkoutValue">{cart.total}</span>
+                </div>
+                <div className="checkoutItem">
+                  <span className="checkoutText">Total</span>
+                  <span className="checkoutValue">{cart.total}</span>
+                </div>
+                <button className="checkoutNow" onClick={createOrder}>
+                  Place Order
+                </button>
               </div>
-              <div className="checkoutItem">
-                <span className="checkoutText">Discount</span>
-                <span className="checkoutValue">{cart.total}</span>
-              </div>
-              <div className="checkoutItem">
-                <span className="checkoutText">Total</span>
-                <span className="checkoutValue">{cart.total}</span>
-              </div>
-              <button className="checkoutNow" onClick={createOrder}>
-                Place Order
-              </button>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
