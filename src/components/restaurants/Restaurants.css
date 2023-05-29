@@ -8,8 +8,8 @@
   height: 12px;
 }
 .restoImage {
-  max-width: 350px;
-  max-height: 160px;
+  width: 350px;
+  height: 160px;
   border-radius: 16px 16px 0 0;
 }
 .restoItem {
@@ -98,7 +98,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 27px;
 }
 
 .featuredDiv {

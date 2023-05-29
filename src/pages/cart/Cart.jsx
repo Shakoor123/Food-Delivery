@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Cart.css";
 import Navbar from "../../components/navbar/Navbar";
 import sushi from "../../assets/sushi.png";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { clearCart } from "../../redux/cartRedux";
+import { useNavigate } from "react-router-dom";
+import { removeProduct } from "../../redux/cartRedux";
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user).currentUser;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const products = cart.products.map((product) => {
+    return {
+      productId: product._id,
+    };
+  });
+  const createOrder = async () => {
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, {
+        userId: user._id,
+        products,
+        amount: cart.total,
+        address: {
+          pin: 671317,
+          place: "kasaragod",
+          state: "kerala",
+          landMark: "near mlp school",
+          phone: 9995559990,
+        },
+      });
+      dispatch(clearCart());
+      navigate(`/orders/${user._id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="home">
       <div className="homeNavWrapper">
@@ -19,17 +51,17 @@ export default function Cart() {
         <div className="Cart">
           <div className="cartLeft">
             {cart.products.map((product) => (
-              <div className="cartItem">
+              <div className="cartItem" key={product._id}>
                 <div className="cartItemLeft">
                   <img src={sushi} alt="" className="cartItrmImg" />
 
-                  <select name="" id="" className="cartItemQty">
+                  {/* <select name="" id="" className="cartItemQty">
                     <option value="1">1</option>
                     <option value="1">2</option>
                     <option value="1">3</option>
                     <option value="1">4</option>
                     <option value="1">5</option>
-                  </select>
+                  </select> */}
                 </div>
                 <div className="cartItemRight">
                   <span className="cartItemTitle">{product.title}</span>
@@ -43,7 +75,12 @@ export default function Cart() {
                   </span>
                   <span className="KnowMore">Know More</span>
                 </div>
-                <button className="CartRemove">Remove</button>
+                {/* <button
+                  className="CartRemove"
+                  onClick={removeCartItem(product._id)}
+                >
+                  Remove
+                </button> */}
               </div>
             ))}
           </div>
@@ -62,7 +99,9 @@ export default function Cart() {
                 <span className="checkoutText">Total</span>
                 <span className="checkoutValue">{cart.total}</span>
               </div>
-              <button className="checkoutNow">Place Order</button>
+              <button className="checkoutNow" onClick={createOrder}>
+                Place Order
+              </button>
             </div>
           </div>
         </div>

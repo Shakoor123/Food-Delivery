@@ -1,0 +1,51 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f3f4ff;
+  font-weight: bold;
+  text-align: left;
+  max-height: 50px;
+}
+
+tr {
+  background-color: #fff3ed;
+  height: 70px;
+}
+
+.id {
+  width: auto;
+}
+
+.pin {
+  width: auto;
+}
+
+.place {
+  width: auto;
+}
+
+.state {
+  width: auto;
+}
+
+.landmark {
+  width: 20%;
+}
+
+.phone {
+  width: auto;
+}
+
+.status {
+  width: auto;
+}

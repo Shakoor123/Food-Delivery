@@ -30,17 +30,23 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (email == "" || password == "") {
+      alerta("please input email and password");
+      return;
+    }
     if (isSignUp) {
+      if (name == "") {
+        alerta("please input username");
+        return;
+      }
       try {
         const res = await axios.post(
           `${import.meta.env.VITE_API_URL}/auth/register`,
           { name, email, password }
         );
-        console.log("Register successfully");
         console.log(res.data);
         setIsSignUp(false);
       } catch (err) {
-        console.log("registration faild");
         console.log(err);
       }
     } else {
@@ -49,11 +55,10 @@ export default function Login() {
           `${import.meta.env.VITE_API_URL}/auth/login`,
           { email, password }
         );
-        console.log("Login successfully");
         dispatch(loginUser(res.data));
-        navigate("/home");
+        localStorage.setItem("foodDelivery", JSON.stringify(res.data));
+        navigate("/");
       } catch (err) {
-        console.log("login faild");
         console.log(err);
       }
     }
@@ -94,7 +99,7 @@ export default function Login() {
               <div className="loginInputWrapper">
                 <input
                   className="logininput"
-                  type="text"
+                  type="email"
                   id="email"
                   value={email}
                   onChange={handleEmailChange}

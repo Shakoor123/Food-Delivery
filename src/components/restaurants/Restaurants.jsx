@@ -126,7 +126,6 @@ export default function Restaurants({ categorieList }) {
         const res = await axios.get(
           `${import.meta.env.VITE_API_URL}/restorent`
         );
-        console.log(res.data);
         setRestorents(res.data);
         setfilteredRestaurants(res.data);
       } catch (err) {
@@ -141,7 +140,6 @@ export default function Restaurants({ categorieList }) {
         categorieList.includes(category)
       );
     });
-    console.log("try", filteredRestaurants);
     setfilteredRestaurants(
       !filteredRestaurants.length == 0 ? filteredRestaurants : restorents
     );
@@ -153,13 +151,7 @@ export default function Restaurants({ categorieList }) {
       <div className="restaurents">
         {filteredRestaurants.map((res) => (
           <div className="restoItem" key={res._id}>
-            <img
-              src={
-                "https://www.realmobiweb.com/blog/wp-content/uploads/2022/02/Cute-and-Funny-Dessert-Business-Names.jpg"
-              }
-              alt=""
-              className="restoImage"
-            />
+            <img src={res.resImage} alt="" className="restoImage" />
             <div className="restoMiddle">
               <div className="restoDetails">
                 <div className="restoTitleAndPrice">

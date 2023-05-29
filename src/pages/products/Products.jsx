@@ -22,7 +22,6 @@ export default function Products() {
           `${import.meta.env.VITE_API_URL}/restorent`
         );
         setRestorents(res.data);
-        setfilteredRestaurants(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -43,7 +42,7 @@ export default function Products() {
     getRestorentProduct();
   }, [id]);
   const changeCurrentRestorent = (id) => {
-    dispatch(addRestorent(id));
+    id = id;
   };
   return (
     <div className="home">
@@ -63,7 +62,7 @@ export default function Products() {
                   onClick={changeCurrentRestorent(res._id)}
                   key={res._id}
                 >
-                  <img src={res1} alt="" className="resImage" />
+                  <img src={res.resImage} alt="" className="resImage" />
                   <span className="resTitle">{res.name}</span>
                   <div className="resCart">
                     <img src={cart} alt="" className="cartImage" />

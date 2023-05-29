@@ -4,15 +4,23 @@ import logo from "../../assets/logo.png";
 import search from "../../assets/search.png";
 import profile from "../../assets/profile.png";
 import cart from "../../assets/cart.png";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/userRedux";
 export default function Navbar() {
   const quantity = useSelector((state) => state.cart.quantity);
+  const user = useSelector((state) => state.user).currentUser;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logoutCurrentUser = () => {
+    localStorage.removeItem("foodDelivery");
+    dispatch(logoutUser());
+    navigate("/login");
+  };
   return (
     <div className="navbar">
       <div className="navLeft">
-        <Link to={"/home"} style={{ textDecoration: "none" }}>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
           <img src={logo} alt="" className="logo" />
         </Link>
         <div className="navSearch">
@@ -22,14 +30,20 @@ export default function Navbar() {
       </div>
       <div className="navRight">
         <div className="navmenu">
-          <span className="navmenuItem">Restaurants</span>
-          <span className="navmenuItem">Deals</span>
-          <span className="navmenuItem">My orders</span>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <span className="navmenuItem">Restaurants</span>
+          </Link>
+          <span className="navmenuItem" onClick={logoutCurrentUser}>
+            Log Out
+          </span>
+          <Link to={`/orders/${user?._id}`} style={{ textDecoration: "none" }}>
+            <span className="navmenuItem">My orders</span>
+          </Link>
         </div>
         <Link to={"/cart"} style={{ textDecoration: "none" }}>
           <div className="cart">
             <img src={cart} alt="" className="cartIcon" />
-            <span className="cartCount">{quantity}</span>
+            {quantity > 0 && <span className="cartCount">{quantity}</span>}
           </div>
         </Link>
         <img src={profile} alt="" className="profile" />
