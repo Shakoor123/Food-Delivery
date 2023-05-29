@@ -34,7 +34,7 @@ export default function Orders() {
             <thead>
               <tr className="titles">
                 <th className="id">ID</th>
-                <th className="pin">Adress</th>
+                <th className="pin">Address</th>
                 <th className="place">Time</th>
                 <th className="state">Phone</th>
                 <th className="landmark">Price</th>
@@ -44,16 +44,32 @@ export default function Orders() {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
+                <tr key={order._id} className="tbody">
                   <td>
+                    <span className="mobileTitle">ID : </span>
+                    {order._id}
+                  </td>
+                  <td>
+                    <span className="mobileTitle">ADDRESS : </span>
                     {order.address.pin},{order.address.place},
                     {order.address.landmark};{order.address.pin}
                   </td>
-                  <td>{order.createdAt}</td>
-                  <td>{order.address.phone}</td>
-                  <td>{order.amount}</td>
-                  <td>{order.status}</td>
+                  <td>
+                    <span className="mobileTitle">TIME : </span>
+                    {order.createdAt}
+                  </td>
+                  <td>
+                    <span className="mobileTitle">PHONE : </span>
+                    {order.address.phone}
+                  </td>
+                  <td className="orderAmout">
+                    <span className="mobileTitle">AMOUNT : </span>
+                    {order.amount}
+                  </td>
+                  <td className="pending">
+                    <span className="mobileTitle">STATUS : </span>
+                    {order.status}
+                  </td>
                 </tr>
               ))}
             </tbody>

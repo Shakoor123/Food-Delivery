@@ -29,10 +29,7 @@ function App() {
           <Route path="/" element={user ? <Home /> : <Login />} />
           <Route path="/slide" element={<Slide />} />
           <Route path="/cart" element={user ? <Cart /> : <Login />} />
-          <Route
-            path="/products/:id"
-            element={user ? <Products /> : <Login />}
-          />
+          <Route path="/products" element={user ? <Products /> : <Login />} />
           <Route path="/orders/:uid" element={user ? <Orders /> : <Login />} />
         </Routes>
       </BrowserRouter>

@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const restorentSlice = createSlice({
-  name: "cart",
+  name: "restorent",
   initialState: {
-    id: "",
+    Rid: "",
   },
   reducers: {
     addRestorent: (state, action) => {
-      state.id = action.payload;
+      state.Rid = action.payload;
     },
   },
 });

@@ -15,119 +15,28 @@ import burger from "../../assets/burger.png";
 import pizza from "../../assets/pizza.png";
 import bbq from "../../assets/meat.png";
 import vegan from "../../assets/broccoli.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addRestorent } from "../../redux/restorentRedux";
 export default function Restaurants({ categorieList }) {
-  // const restaurants = [
-  //   {
-  //     id: 0,
-  //     name: "Royal Sushi House",
-  //     time: "30-40",
-  //     price: "32",
-  //     cartValue: 0,
-  //     resImage: res1,
-  //     featured: true,
-  //     foodlist: [
-  //       {
-  //         fid: 0,
-  //         fname: "Sushi",
-  //         fImg: sushi,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Burgers & Pizza",
-  //     time: "40-60",
-  //     price: "24",
-  //     cartValue: 2,
-  //     resImage: res2,
-  //     featured: true,
-  //     foodlist: [
-  //       {
-  //         fid: 0,
-  //         fname: "Burger",
-  //         fImg: burger,
-  //       },
-  //       {
-  //         fid: 1,
-  //         fname: "Pizza",
-  //         fImg: pizza,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Ninja sushi",
-  //     time: "20-40",
-  //     price: "40",
-  //     cartValue: 0,
-  //     resImage: res3,
-  //     foodlist: [
-  //       {
-  //         fid: 0,
-  //         fname: "Sushi",
-  //         fImg: sushi,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Sushi master",
-  //     time: "60-70",
-  //     price: "49",
-  //     cartValue: 0,
-  //     resImage: res4,
-  //     foodlist: [
-  //       {
-  //         fid: 0,
-  //         fname: "Sushi",
-  //         fImg: sushi,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Japanese sushi",
-  //     time: "30-50",
-  //     price: "104",
-  //     cartValue: 0,
-  //     resImage: res5,
-  //     foodlist: [
-  //       {
-  //         fid: 0,
-  //         fname: "Sushi",
-  //         fImg: sushi,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Kobe",
-  //     time: "20-30",
-  //     price: "57",
-  //     cartValue: 0,
-  //     resImage: res6,
-  //     foodlist: [
-  //       {
-  //         fid: 0,
-  //         fname: "Sushi",
-  //         fImg: sushi,
-  //       },
-  //     ],
-  //   },
-  // ];
   const [restorents, setRestorents] = useState([]);
   const [filteredRestaurants, setfilteredRestaurants] = useState([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const selectRestorent = (id) => {
+    dispatch(addRestorent(id));
+    navigate("/products");
+  };
   useEffect(() => {
     const getRestorents = async () => {
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_API_URL}/restorent`
         );
-        setRestorents(res.data);
         setfilteredRestaurants(res.data);
+        setRestorents(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -150,17 +59,18 @@ export default function Restaurants({ categorieList }) {
       <h3 className="restoTitle">Nearby restaurants</h3>
       <div className="restaurents">
         {filteredRestaurants.map((res) => (
-          <div className="restoItem" key={res._id}>
+          <div
+            className="restoItem"
+            key={res._id}
+            onClick={() => {
+              selectRestorent(res._id);
+            }}
+          >
             <img src={res.resImage} alt="" className="restoImage" />
             <div className="restoMiddle">
               <div className="restoDetails">
                 <div className="restoTitleAndPrice">
-                  <Link
-                    to={`/products/${res._id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <span className="restoItemTitle">{res.name}</span>
-                  </Link>
+                  <span className="restoItemTitle">{res.name}</span>
                   <span className="timeAndPrice">
                     <img src={clock} alt="" className="clock" /> {res.time} min
                     ▪ ${res.price}

@@ -12,9 +12,10 @@ import { addRestorent } from "../../redux/restorentRedux";
 export default function Products() {
   const [restorents, setRestorents] = useState([]);
   const [products, setProducts] = useState([]);
+  const [Rid, setRid] = useState(useSelector((state) => state.restorent).Rid);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  var { id } = useParams();
+
   useEffect(() => {
     const getRestorents = async () => {
       try {
@@ -27,12 +28,12 @@ export default function Products() {
       }
     };
     getRestorents();
-  }, []);
+  }, [Rid]);
   useEffect(() => {
     const getRestorentProduct = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/products/restorent/${id}`
+          `${import.meta.env.VITE_API_URL}/products/restorent/${Rid}`
         );
         setProducts(res.data);
       } catch (err) {
@@ -40,9 +41,9 @@ export default function Products() {
       }
     };
     getRestorentProduct();
-  }, [id]);
-  const changeCurrentRestorent = (id) => {
-    id = id;
+  }, [Rid]);
+  const changeCurrentRestorent = async (id) => {
+    setRid(id);
   };
   return (
     <div className="home">
@@ -58,8 +59,10 @@ export default function Products() {
             <div className="resWrapper">
               {restorents.map((res) => (
                 <div
-                  className={res._id == id ? "resItem resActive" : "resItem"}
-                  onClick={changeCurrentRestorent(res._id)}
+                  className={res._id == Rid ? "resItem resActive" : "resItem"}
+                  onClick={() => {
+                    changeCurrentRestorent(res._id);
+                  }}
                   key={res._id}
                 >
                   <img src={res.resImage} alt="" className="resImage" />
@@ -75,7 +78,7 @@ export default function Products() {
           <div className="productsRight">
             {products.map((product) => (
               <div className="singleProduct" key={product._id}>
-                <img src={sushi} alt="" className="productImage" />
+                <img src={product.img} alt="" className="productImage" />
                 <span className="productTitle">{product.title}</span>
                 <div className="offerTextAndPrice">
                   <span className="offerText"> 50 % off </span>

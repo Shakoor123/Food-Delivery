@@ -49,3 +49,32 @@ tr {
 .status {
   width: auto;
 }
+.pending {
+  color: green;
+}
+.orderAmout {
+  font-weight: 700;
+  color: rgb(54, 102, 223);
+}
+.mobileTitle {
+  display: none;
+}
+@media only screen and (max-width: 480px) {
+  th {
+    display: none;
+  }
+  .tbody {
+    display: flex;
+    flex-direction: column;
+  }
+  tr {
+    height: auto;
+    padding: 15px;
+    border: 1px solid gray;
+  }
+  .mobileTitle {
+    display: contents;
+    color: rgb(58, 54, 54);
+    font-weight: 300;
+  }
+}

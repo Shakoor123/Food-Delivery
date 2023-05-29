@@ -53,7 +53,7 @@ export default function Cart() {
             {cart.products.map((product) => (
               <div className="cartItem" key={product._id}>
                 <div className="cartItemLeft">
-                  <img src={sushi} alt="" className="cartItrmImg" />
+                  <img src={product.img} alt="" className="cartItrmImg" />
 
                   {/* <select name="" id="" className="cartItemQty">
                     <option value="1">1</option>
